@@ -1,0 +1,17 @@
+version : "3.8"
+
+services:
+  mest-testing-db:
+    image: mongo:6.0.13-jammy
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:?mongo_initdb_root_username_missing}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:?mongo_initdb_root_password_missing}
+    ports:
+      - "27017:27017"
+    volumes:
+      - type: volume
+        source: mongo-data
+        target: /data/db
+
+volumes:
+  mongo-data:
