@@ -6,11 +6,11 @@ import {
   Patch,
   Param,
   Delete,
-} from '@nestjs/common'
-import { SiteService } from './site.service'
-import { SiteDto } from './dto/site.dto'
+} from "@nestjs/common"
+import { SiteService } from "./site.service"
+import { SiteDto } from "./dto/site.dto"
 
-@Controller('site')
+@Controller("site")
 export class SiteController {
   constructor(private readonly siteService: SiteService) {}
 
@@ -24,18 +24,18 @@ export class SiteController {
     return await this.siteService.findAll()
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
+  @Get(":id")
+  async findOne(@Param("id") id: string) {
     return this.siteService.findOne(id)
   }
 
-  @Patch(':id')
-  async update(@Param('id') id: string, @Body() siteDto: SiteDto) {
+  @Patch(":id")
+  async update(@Param("id") id: string, @Body() siteDto: SiteDto) {
     return this.siteService.update(+id, siteDto)
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
+  @Delete(":id")
+  async remove(@Param("id") id: string) {
     return this.siteService.remove(+id)
   }
 }

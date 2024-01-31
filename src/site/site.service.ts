@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common'
-import { SiteDto } from './dto/site.dto'
-import { InjectRepository } from '@nestjs/typeorm'
-import { Site } from './entities/site.entity'
-import { Repository } from 'typeorm'
-import { ObjectId } from 'mongodb'
+import { Injectable } from "@nestjs/common"
+import { SiteDto } from "./dto/site.dto"
+import { InjectRepository } from "@nestjs/typeorm"
+import { Site } from "./entities/site.entity"
+import { Repository } from "typeorm"
+import { ObjectId } from "mongodb"
 
 @Injectable()
 export class SiteService {

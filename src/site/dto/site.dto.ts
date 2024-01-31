@@ -1,5 +1,5 @@
-import { ObjectId } from 'mongodb'
-import { Site } from '../entities/site.entity'
+import { ObjectId } from "mongodb"
+import { Site } from "../entities/site.entity"
 
 export class SiteDto {
   constructor(

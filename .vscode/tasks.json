@@ -1,0 +1,34 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Create migration",
+            "type": "shell",
+            "command": "npx typeorm-ts-node-commonjs migration:create src/migrations/${input:migration_name}"
+        },
+        {
+            "label": "Generate migration",
+            "type": "shell",
+            "command": "npx typeorm-ts-node-commonjs migration:generate src/migrations/${input:migration_name} -d ormconfig.ts"
+        },
+        {
+            "label": "Run migrations",
+            "type": "shell",
+            "command": "npx typeorm-ts-node-commonjs migration:run -d ormconfig.ts"
+        },
+        {
+            "label": "Revert migration",
+            "type": "shell",
+            "command": "npx typeorm-ts-node-commonjs migration:revert -d ormconfig.ts"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "migration_name",
+            "type": "promptString",
+            "description": "Migration name"
+        }
+    ]
+}

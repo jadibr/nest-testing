@@ -1,13 +1,10 @@
 import { Entity, ObjectId, ObjectIdColumn, Column } from "typeorm"
 
 @Entity()
-export class Site {
+export class Amenity {
   @ObjectIdColumn()
   _id: ObjectId
 
   @Column()
   name: string
-
-  @Column()
-  x: number
 }
