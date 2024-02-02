@@ -1,30 +1,29 @@
 import { Injectable } from "@nestjs/common"
 import { SiteDto } from "./dto/site.dto"
-import { InjectRepository } from "@nestjs/typeorm"
-import { Site } from "./entities/site.entity"
-import { Repository } from "typeorm"
-import { ObjectId } from "mongodb"
+import { ISite } from "./entities/site.entity"
+import { InjectModel } from "@nestjs/mongoose"
+import { Model } from "mongoose"
 
 @Injectable()
 export class SiteService {
   constructor(
-    @InjectRepository(Site)
-    private readonly siteRepository: Repository<Site>,
+    @InjectModel("Site")
+    private readonly siteModel: Model<ISite>,
   ) {}
 
   async create(siteDto: SiteDto): Promise<SiteDto> {
-    const createdSite = await this.siteRepository.save(
-      SiteDto.convertToEntity(siteDto),
+    const createdSite = await this.siteModel.create(
+      SiteDto.convertToEntity(this.siteModel, siteDto),
     )
     return SiteDto.convertToDto(createdSite)
   }
 
-  async findAll() {
-    return await this.siteRepository.find()
+  async findAll(): Promise<SiteDto[]> {
+    return (await this.siteModel.find()).map((s) => SiteDto.convertToDto(s))
   }
 
-  async findOne(siteId: string) {
-    return await this.siteRepository.findOneBy({ _id: new ObjectId(siteId) })
+  async findOne(siteId: string): Promise<SiteDto> {
+    return await this.siteModel.findById(siteId)
   }
 
   async update(id: number, siteDto: SiteDto) {

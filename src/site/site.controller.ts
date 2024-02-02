@@ -10,7 +10,7 @@ import {
 import { SiteService } from "./site.service"
 import { SiteDto } from "./dto/site.dto"
 
-@Controller("site")
+@Controller("sites")
 export class SiteController {
   constructor(private readonly siteService: SiteService) {}
 

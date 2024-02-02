@@ -1,13 +1,11 @@
-import { Entity, ObjectId, ObjectIdColumn, Column } from "typeorm"
+import mongoose, { Document } from "mongoose"
 
-@Entity()
-export class Site {
-  @ObjectIdColumn()
-  _id: ObjectId
+export const SiteSchema = new mongoose.Schema({
+  name: String,
+  x: Number,
+})
 
-  @Column()
+export interface ISite extends Document {
   name: string
-
-  @Column()
   x: number
 }

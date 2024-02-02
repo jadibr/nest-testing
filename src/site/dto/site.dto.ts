@@ -1,5 +1,5 @@
-import { ObjectId } from "mongodb"
-import { Site } from "../entities/site.entity"
+import { ISite } from "../entities/site.entity"
+import { Model } from "mongoose"
 
 export class SiteDto {
   constructor(
@@ -8,17 +8,14 @@ export class SiteDto {
     public x: number,
   ) {}
 
-  static convertToEntity(site: SiteDto): Site {
-    const siteEntity = new Site()
-
-    siteEntity._id = new ObjectId(site.id)
-    siteEntity.name = site.name
-    siteEntity.x = site.x
-
-    return siteEntity
+  static convertToEntity(siteModel: Model<ISite>, site: SiteDto): ISite {
+    return new siteModel({
+      name: site.name,
+      x: site.x,
+    })
   }
 
-  static convertToDto(siteEntity: Site): SiteDto {
-    return new SiteDto(siteEntity._id.toString(), siteEntity.name, siteEntity.x)
+  static convertToDto(siteEntityDoc: ISite): SiteDto {
+    return new SiteDto(siteEntityDoc.id, siteEntityDoc.name, siteEntityDoc.x)
   }
 }

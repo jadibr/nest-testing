@@ -1,10 +1,5 @@
-import { Entity, ObjectId, ObjectIdColumn, Column } from "typeorm"
+import mongoose from "mongoose"
 
-@Entity()
-export class Amenity {
-  @ObjectIdColumn()
-  _id: ObjectId
-
-  @Column()
-  name: string
-}
+export const AmenitySchema = new mongoose.Schema({
+  name: String,
+})

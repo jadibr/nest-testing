@@ -1,9 +1,8 @@
 import { Test, TestingModule } from "@nestjs/testing"
 import { SiteController } from "./site.controller"
 import { SiteService } from "./site.service"
-import { Site } from "./entities/site.entity"
-import { ObjectId } from "mongodb"
-import { getRepositoryToken } from "@nestjs/typeorm"
+import { SiteDto } from "./dto/site.dto"
+import { getModelToken } from "@nestjs/mongoose"
 
 describe("SiteController", () => {
   let controller: SiteController
@@ -15,7 +14,7 @@ describe("SiteController", () => {
       providers: [
         SiteService,
         {
-          provide: getRepositoryToken(Site),
+          provide: getModelToken("Site"),
           useValue: {}, // the shape of the mocked repository shouldn't matter as in controller test
           // the values of the mocked service (with spyOn()) should be returned
           // irrelevant of the mocked repository
@@ -33,22 +32,11 @@ describe("SiteController", () => {
 
   describe("GET", () => {
     it("should return sites returned by the service", async () => {
-      const site1 = new Site()
-      site1._id = new ObjectId("123456789012345678901234")
-      site1.name = "site 1"
-      site1.x = 1
-
-      const site2 = new Site()
-      site2._id = new ObjectId("123456789012345678901235")
-      site2.name = "site 2"
-      site2.x = 2
-
-      const site3 = new Site()
-      site3._id = new ObjectId("123456789012345678901236")
-      site3.name = "site 3"
-      site3.x = 3
-
-      const sites = [site1, site2, site3]
+      const sites = [
+        new SiteDto(undefined, "site 1", 1),
+        new SiteDto(undefined, "site 2", 2),
+        new SiteDto(undefined, "site 3", 3),
+      ]
 
       jest.spyOn(service, "findAll").mockImplementation(async () => sites)
 
