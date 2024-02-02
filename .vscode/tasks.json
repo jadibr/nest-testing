@@ -6,22 +6,17 @@
         {
             "label": "Create migration",
             "type": "shell",
-            "command": "npx typeorm-ts-node-commonjs migration:create src/migrations/${input:migration_name}"
-        },
-        {
-            "label": "Generate migration",
-            "type": "shell",
-            "command": "npx typeorm-ts-node-commonjs migration:generate src/migrations/${input:migration_name} -d ormconfig.ts"
+            "command": "npx migrate-mongo create ${input:migration_name}"
         },
         {
             "label": "Run migrations",
             "type": "shell",
-            "command": "npx typeorm-ts-node-commonjs migration:run -d ormconfig.ts"
+            "command": "npx migrate-mongo up"
         },
         {
             "label": "Revert migration",
             "type": "shell",
-            "command": "npx typeorm-ts-node-commonjs migration:revert -d ormconfig.ts"
+            "command": "npx migrate-mongo down"
         }
     ],
     "inputs": [
